@@ -1,5 +1,6 @@
-from RandomNumberGenerator import RandomNumberGenerator
 from Calculate import calculate
+from RandomNumberGenerator import RandomNumberGenerator
+from Schrage import schrage
 
 
 def main():
@@ -33,7 +34,9 @@ def main():
     #dla pobranych ilosci zadan przypisujemy kolejne czasy wykonania poszczególnych zadań
     for task in numberTasks:
         rj.append(generator.nextInt(1,sumA))
-        qj.append(generator.nextInt(1,29))
+    
+    for task in numberTasks:
+        qj.append(generator.nextInt(1,sumA))
 
     #wypisanie zadań i kolejnych czasow zadań
     print("nr:", nr)
@@ -41,8 +44,28 @@ def main():
     print("pj: ", pj)
     print("qj: ", qj)
     print("\n")
+    #funkcja celu dla nieposortowanej permutacji
+    Cmax = calculate(rj,pj,qj, maxTaskNumber)
+    print("Cmax", Cmax)
+    print("\n")
 
-    Cmax = calculate(rj, pj, qj, maxTaskNumber)
-    
+    #inicjalizacja permutacji zadań
+    pi = nr.copy()
+
+    #sortowanie wektorow po optymalizacji
+    solution = []
+    for task in numberTasks: 
+        solution.append([pi[task-1],rj[task-1],pj[task-1],qj[task-1]])
+
+    #algorytm Schrage do optymalizacji zadań
+    pi = schrage(rj, pj, qj, numberTasks)
+
+    #posorotwanie odpowiednich wektorów
+    sort = {x: i for i, x in enumerate(pi)}
+    solution.sort(key = lambda x: sort[x[0]])
+    print("pi:", pi)
+    Cmax = calculate([row[1] for row in solution], [row[2] for row in solution], [row[3] for row in solution], maxTaskNumber)
+    print("Cmax", Cmax)
+
 if __name__ == '__main__':
 	main()

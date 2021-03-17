@@ -1,7 +1,7 @@
 from typing import List
 
 #liczenie wartości funkcji celu
-def calculate(rj : List[int], pj: List[int], qj: List[int],taskNumber):
+def calculate(rj : List[int], pj: List[int], qj: List[int], taskNumber):
     #wektor rozpoczecia kolejnych zadan
     Sj = []
     #wektor momentow zakończenia zadan
@@ -15,11 +15,10 @@ def calculate(rj : List[int], pj: List[int], qj: List[int],taskNumber):
     Cmax = Cmaxj[0]
     #przypisanie kolejncyh argumentów
     for j in range(1, taskNumber):
-        Sj.append(max(rj[0], Cj[j-1]))
+        Sj.append(max(rj[j], Cj[j-1]))
         Cj.append(Sj[j]+ pj[j])
         Cmaxj.append(Cj[j] + qj[j])
         Cmax = max(Cmax, Cmaxj[j])
     print("Sj: ", Sj)
-    print("Cj: ", Cj)
-    print("Cmax: ", Cmax)    
+    print("Cj: ", Cj)   
     return Cmax
