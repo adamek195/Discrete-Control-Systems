@@ -42,7 +42,7 @@ def main():
     print("qj: ", qj)
     print("\n")
 
-
+    Cmax = calculate(rj, pj, qj, maxTaskNumber)
     
 if __name__ == '__main__':
 	main()

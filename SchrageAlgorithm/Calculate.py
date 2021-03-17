@@ -19,4 +19,7 @@ def calculate(rj : List[int], pj: List[int], qj: List[int],taskNumber):
         Cj.append(Sj[j]+ pj[j])
         Cmaxj.append(Cj[j] + qj[j])
         Cmax = max(Cmax, Cmaxj[j])
+    print("Sj: ", Sj)
+    print("Cj: ", Cj)
+    print("Cmax: ", Cmax)    
     return Cmax
