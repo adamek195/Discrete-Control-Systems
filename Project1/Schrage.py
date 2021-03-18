@@ -34,4 +34,3 @@ def schrage(rj : List[int], pj: List[int], qj: List[int], numberTasks):
 
 
 
-
