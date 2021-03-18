@@ -9,7 +9,7 @@ class RandomNumberGenerator:
         b = 127773
         c = 2836
         k = int(self.__seed / b)
-        self.__seed = a * (self.__seed % b) - k * c;
+        self.__seed = a * (self.__seed % b) - k * c
         if self.__seed < 0:
             self.__seed = self.__seed + m
         value_0_1 = self.__seed

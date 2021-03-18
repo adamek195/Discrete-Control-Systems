@@ -52,7 +52,7 @@ def main():
     #inicjalizacja permutacji zadań
     pi = nr.copy()
 
-    #sortowanie wektorow po optymalizacji
+    #strutktura skladajaca sie z 
     solution = []
     for task in numberTasks: 
         solution.append([pi[task-1],rj[task-1],pj[task-1],qj[task-1]])
@@ -64,7 +64,19 @@ def main():
     sort = {x: i for i, x in enumerate(pi)}
     solution.sort(key = lambda x: sort[x[0]])
     print("pi:", pi)
-    Cmax = calculate([row[1] for row in solution], [row[2] for row in solution], [row[3] for row in solution], maxTaskNumber)
+
+    #czyscimy wektory aby moc je ustawic po sortowaniu
+    rj = []
+    pj = []
+    qj = []
+    #przypisujemy posortowane wektory
+    for task in numberTasks:
+        rj.append(solution[task-1][1])
+        pj.append(solution[task-1][2])
+        qj.append(solution[task-1][3])
+
+    #funckja celu dla posortowanych wektorow
+    Cmax = calculate(rj,pj,qj, maxTaskNumber)  
     print("Cmax", Cmax)
 
 if __name__ == '__main__':

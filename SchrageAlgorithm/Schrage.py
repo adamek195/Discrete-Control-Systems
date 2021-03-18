@@ -1,5 +1,5 @@
 from typing import List
-import math
+from decimal import Decimal 
 
 #implementacja algorytmu Schrage
 def schrage(rj : List[int], pj: List[int], qj: List[int], numberTasks):
@@ -17,13 +17,13 @@ def schrage(rj : List[int], pj: List[int], qj: List[int], numberTasks):
         while len(N) and ( min(rj) <= t):
             j = rj.index(min(rj))
             #upewniamy sie ze tej wartosci juz nie uzyjemy
-            rj[j] = 999999999
+            rj[j] = Decimal('Infinity') 
             G.append(j+1)
             N.remove(j+1)
         if len(G):
             j = qj.index(max([qj[i - 1] for i in G])) + 1
             #upewniamy sie ze tej wartosci juz nie uzyjemy        
-            qj[j -1] = -999999999
+            qj[j -1] = Decimal('-Infinity')
             G.remove(j)
             pi.append(j)
             t += pj[j-1]
