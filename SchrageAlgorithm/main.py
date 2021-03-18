@@ -75,7 +75,7 @@ def main():
         pj.append(solution[task-1][2])
         qj.append(solution[task-1][3])
 
-    #funckja celu dla posortowanych wektorow
+    #funkcja celu dla posortowanych wektorow
     Cmax = calculate(rj,pj,qj, maxTaskNumber)  
     print("Cmax", Cmax)
 
