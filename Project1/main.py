@@ -1,6 +1,7 @@
 from Calculate import calculate
 from RandomNumberGenerator import RandomNumberGenerator
 from Schrage import schrage
+from SchragePmtn import schragePmtn
 
 
 def main():
@@ -36,7 +37,7 @@ def main():
         rj.append(generator.nextInt(1,sumA))
     
     for task in numberTasks:
-        qj.append(generator.nextInt(1,sumA))
+        qj.append(generator.nextInt(1,29))
 
     #wypisanie zadań i kolejnych czasow zadań
     print("nr:", nr)
@@ -49,6 +50,7 @@ def main():
     print("Cmax", Cmax)
     print("\n")
 
+
     #inicjalizacja permutacji zadań
     pi = nr.copy()
 
@@ -57,8 +59,7 @@ def main():
     for task in numberTasks: 
         solution.append([pi[task-1],rj[task-1],pj[task-1],qj[task-1]])
 
-    #algorytm Schrage do optymalizacji zadań
-    pi = schrage(rj, pj, qj, numberTasks)
+    pi = schragePmtn(rj, pj, qj, numberTasks)
 
     #posorotwanie odpowiednich wektorów
     sort = {x: i for i, x in enumerate(pi)}
