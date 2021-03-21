@@ -19,6 +19,8 @@ def main():
     for task in tasks:   
         nr.append(task)
         p.append(generator.nextInt(1,29))
+
+    pi = nr.copy() #inicjalizacja permutacji zadań 
     
     A = 0
     # X = 29
@@ -31,13 +33,14 @@ def main():
     for task in tasks:
         q.append(generator.nextInt(1,A))
 
-    print("nr:", nr)
+    print("\nnr:", nr)
     print("r: ", r)
     print("p: ", p)
     print("q: ", q)
     print("\n")
 
     S, C, Cq, Cmax = calculate(r,p,q, taskNumber)
+    print(f'pi: {pi}')
     print("S: ", S)
     print("C: ", C)
     print(f"Cq: {Cq}")   
@@ -46,7 +49,7 @@ def main():
 
 
     #inicjalizacja permutacji zadań
-    pi = nr.copy()
+    # pi = nr.copy()
 
     #strutktura skladajaca sie z 
     solution = []
@@ -58,8 +61,7 @@ def main():
     pi = schrage(r, p, q, tasks)
     sort = {x: i for i, x in enumerate(pi)}
     solution.sort(key = lambda x: sort[x[0]])
-    print("pi:", pi)
-  
+    
     rjSchrage = []
     pjSchrage = []
     qjSchrage = []
@@ -70,32 +72,35 @@ def main():
         qjSchrage.append(solution[task-1][3])
 
     SSchrage, CSchrage, CqSchrage, CmaxSchrager = calculate(rjSchrage, pjSchrage, qjSchrage, taskNumber) 
+    print("pi:", pi)
     print("S: ", SSchrage)
     print("C: ", CSchrage)
     print(f"Cq: {CqSchrage}")     
     print("Cmax", CmaxSchrager)
     
     # Schrage z prerwaniami 
-    # pi = nr.copy()
-    # print("\nSchrage z przerwaniami")
-    # pi = schragePmtn(rj, pj, qj, numberTasks)
+    pi = nr.copy()
+    print("\nSchrage z przerwaniami")
+    pi = schragePmtn(r, p, q, tasks)
+    sort = {x: i for i, x in enumerate(pi)}
+    solution.sort(key = lambda x: sort[x[0]])
 
-    # sort = {x: i for i, x in enumerate(pi)}
-    # solution.sort(key = lambda x: sort[x[0]])
-    # print("pi:", pi)
+    rSchragePmtn = []
+    pSchragePmtn = []
+    qSchragePmtn = []
 
-    # rjSchragePmtn = []
-    # pjSchragePmtn = []
-    # qjSchragePmtn = []
-
-    # for task in numberTasks:
-    #     rjSchragePmtn.append(solution[task-1][1])
-    #     pjSchragePmtn.append(solution[task-1][2])
-    #     qjSchragePmtn.append(solution[task-1][3])
+    for task in tasks:
+        rSchragePmtn.append(solution[task-1][1])
+        pSchragePmtn.append(solution[task-1][2])
+        qSchragePmtn.append(solution[task-1][3])
 
   
-    # Cmax = calculate(rjSchragePmtn, pjSchragePmtn, qjSchragePmtn, maxTaskNumber)[2]  
-    # print("Cmax", Cmax)
+    SSchragePmtn, CSchragePmtn, CqSchragePmtn, CmaxSchragerPmtn = calculate(rSchragePmtn, pSchragePmtn, qSchragePmtn, taskNumber)  
+    print("pi:", pi)
+    print("S: ", SSchragePmtn)
+    print("C: ", CSchragePmtn)
+    print("Cq: ", CqSchragePmtn)     
+    print("Cmax", CmaxSchragerPmtn)
 
 if __name__ == '__main__':
 	main()
