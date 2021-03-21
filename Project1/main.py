@@ -4,6 +4,7 @@ from Schrage import schrage
 from SchragePmtn import schragePmtn
 
 
+
 def main():
     seed = int(input("Wprowadź Z:"))
     generator = RandomNumberGenerator(seed) 
@@ -57,8 +58,8 @@ def main():
         solution.append([pi[task-1], r[task-1], p[task-1], q[task-1]])
 
     #Schrage 
-    print("Schrage:")
-    pi = schrage(r, p, q, tasks)
+    print("Po sortowaniu:")
+    pi = schragePmtn(r, p, q, tasks)
     sort = {x: i for i, x in enumerate(pi)}
     solution.sort(key = lambda x: sort[x[0]])
     
@@ -78,29 +79,8 @@ def main():
     print(f"Cq: {CqSchrage}")     
     print("Cmax", CmaxSchrager)
     
-    # Schrage z prerwaniami 
-    pi = nr.copy()
-    print("\nSchrage z przerwaniami")
-    pi = schragePmtn(r, p, q, tasks)
-    sort = {x: i for i, x in enumerate(pi)}
-    solution.sort(key = lambda x: sort[x[0]])
-
-    rSchragePmtn = []
-    pSchragePmtn = []
-    qSchragePmtn = []
-
-    for task in tasks:
-        rSchragePmtn.append(solution[task-1][1])
-        pSchragePmtn.append(solution[task-1][2])
-        qSchragePmtn.append(solution[task-1][3])
-
-  
-    SSchragePmtn, CSchragePmtn, CqSchragePmtn, CmaxSchragerPmtn = calculate(rSchragePmtn, pSchragePmtn, qSchragePmtn, taskNumber)  
-    print("pi:", pi)
-    print("S: ", SSchragePmtn)
-    print("C: ", CSchragePmtn)
-    print("Cq: ", CqSchragePmtn)     
-    print("Cmax", CmaxSchragerPmtn)
 
 if __name__ == '__main__':
 	main()
+
+
