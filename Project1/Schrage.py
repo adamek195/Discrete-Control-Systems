@@ -3,16 +3,11 @@ from decimal import Decimal
 
 #implementacja algorytmu Schrage
 def schrage(rj : List[int], pj: List[int], qj: List[int], numberTasks):
-    #numer zadania w permutacji
-    k = 1
-    # zbiór zadań gotowych do realizacji
-    G = []
-    #zbiór zadań nieuszeregowanych
-    N = list(numberTasks)
-    #permutacja zadań
-    pi = []
-    #zmienna pomocnicza symbolizującą chwilę czasową
-    t = min(rj)
+    k = 1 #numer zadania w permutacji
+    G = [] # zbiór zadań gotowych do realizacji
+    N = list(numberTasks) #zbiór zadań nieuszeregowanych
+    pi = [] #permutacja zadań
+    t = min(rj) #zmienna pomocnicza symbolizującą chwilę czasową
     while len(G) or len(N):
         while len(N) and ( min(rj) <= t):
             j = rj.index(min(rj))

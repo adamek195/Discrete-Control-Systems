@@ -2,40 +2,33 @@ from typing import List
 from decimal import Decimal
 
 
-def schragePmtn(rj : List[int], pj: List[int], qj: List[int], numberTasks):
-    # zbiór zadań gotowych do realizacji
-    G = []
-    #zbiór zadań nieuszeregowanych
-    N = list(numberTasks)
-    #aktualne zadanie majace mniejszy czas dostarczenia q
-    l = 0
-    #zmienna pomocnicza symbolizującą chwilę czasową
-    t = 0
-    #permutacja zadań
-    pi = []
-    #przypisanie pierwszemu czasu dostarczenia nieskonczony czas
-    qj[0] = 999999999
+def schragePmtn(r : List[int], p: List[int], q: List[int], numberTasks):
+    Cmax = 0 
+    G = [] # zbiór zadań gotowych do realizacji
+    N = list(numberTasks) #zbiór zadań nieuszeregowanych
+    t = 0 #zmienna pomocnicza symbolizującą chwilę czasową
+    l = 0 #aktualne zadanie majace mniejszy czas dostarczenia q
+    q[0] = 999999999 #przypisanie pierwszemu czasu dostarczenia nieskonczony czas
+    pi = [] #permutacja zadań
     while len(G) or len(N):
-        while len(N) and ( min(rj) <= t):
-            j = rj.index(min(rj))
-            #upewniamy sie ze tej wartosci juz nie uzyjemy
-            rj[j] = 999999999 
+        while len(N) and ( min(r) <= t):
+            j = r.index(min(r))
+            r[j] = 999999999  #upewniamy sie ze tej wartosci juz nie uzyjemy
             G.append(j+1)
             N.remove(j+1)
             #obsluga przerwań
-            if qj[j] > qj[l]:
-                pj[l] = t - rj[j]
-                t = rj[j]
-                if pj[l] > 0:
+            if q[j] > q[l]:
+                p[l] = t - r[j]
+                t = r[j]
+                if p[l] > 0:
                     G.remove(j+1)    
         if len(G):
-            j = qj.index(max([qj[i - 1] for i in G])) + 1
-            #upewniamy sie ze tej wartosci juz nie uzyjemy        
-            qj[j -1] = -999999999
+            j = q.index(max([q[i - 1] for i in G])) + 1
+            q[j -1] = -999999999 #upewniamy sie ze tej wartosci juz nie uzyjemy 
             G.remove(j)
             pi.append(j)
-            t += pj[j-1]
+            t += p[j-1]
             l = j-1
         else:
-            t = min(rj)
+            t = min(r)
     return pi        
