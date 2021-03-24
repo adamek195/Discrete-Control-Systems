@@ -59,7 +59,7 @@ def main():
 
     #Schrage 
     print("Po sortowaniu:")
-    pi = schragePmtn(r, p, q, tasks)
+    pi = schrage(r, p, q, tasks)
     sort = {x: i for i, x in enumerate(pi)}
     solution.sort(key = lambda x: sort[x[0]])
     
