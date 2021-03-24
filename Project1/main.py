@@ -32,7 +32,7 @@ def main():
         r.append(generator.nextInt(1,A))
 
     for task in tasks:
-        q.append(generator.nextInt(1,A))
+        q.append(generator.nextInt(1,29))
 
     print("\nnr:", nr)
     print("r: ", r)
