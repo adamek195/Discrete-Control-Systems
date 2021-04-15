@@ -1,48 +1,86 @@
-from RandomNumberGenerator import RandomNumberGenerator
 from Calculate import calculate
+from RandomNumberGenerator import RandomNumberGenerator
+from Schrage import schrage
+from SchragePmtn import schragePmtn
+
 
 
 def main():
-    #pobieramy ziarno Z
     seed = int(input("Wprowadź Z:"))
-    #dla podanego ziarna wywolujemy konstruktor parametryczny
-    generator = RandomNumberGenerator(seed) 
-    #wprowadzamy liczbe zadan n
-    maxTaskNumber = int(input("Wprtowadź liczbe zadań:"))
-    #inicjalizacja listy zadan
-    numberTasks = range(1, maxTaskNumber+1)
-    #wektor kolejnych zadan
-    nr = [] 
-    #czas przygotowania kolejnych zadań
-    rj = [] 
-    #czas wykonania kolejnych zadan
-    pj = [] 
-    #czas dostarczenia/stygnięcia kolejnych zadań
-    qj = []
+    generator = RandomNumberGenerator(seed)
+    taskNumber = int(input("Wprtowadź liczbe zadań:"))
+    tasks = range(1, taskNumber+1)
 
-    #dla pobranych ilości zadań n losujemy czas wykonania kolejnych zadań
-    for task in numberTasks:   
+    nr = []  #wektor kolejnych zadan
+    r = []  #czas przygotowania kolejnych zadań
+    p = []  #czas wykonania kolejnych zadan
+    q = []  #czas dostarczenia/stygnięcia kolejnych zadań
+
+    #generowanie danych do zadania
+    for task in tasks:
         nr.append(task)
-        pj.append(generator.nextInt(1,29))
+        p.append(generator.nextInt(1,29))
 
-    #suma kolejnych czasow wykonania zadan
-    sumA = 0
-    for number in pj:
-        sumA += number
+    pi = nr.copy() #inicjalizacja permutacji zadań
 
-    #dla pobranych ilosci zadan przypisujemy kolejne czasy wykonania poszczególnych zadań
-    for task in numberTasks:
-        rj.append(generator.nextInt(1,sumA))
-        qj.append(generator.nextInt(1,29))
+    A = 0
+    # X = 29
+    for number in p:
+        A += number
 
-    #wypisanie zadań i kolejnych czasow zadań
-    print("nr:", nr)
-    print("rj: ", rj)
-    print("pj: ", pj)
-    print("qj: ", qj)
+    for task in tasks:
+        r.append(generator.nextInt(1,A))
+
+    for task in tasks:
+        q.append(generator.nextInt(1,29))
+
+    print("\nnr:", nr)
+    print("r: ", r)
+    print("p: ", p)
+    print("q: ", q)
+    print("\n")
+
+    S, C, Cq, Cmax = calculate(r,p,q, taskNumber)
+    print(f'pi: {pi}')
+    print("S: ", S)
+    print("C: ", C)
+    print(f"Cq: {Cq}")
+    print("Cmax", Cmax)
     print("\n")
 
 
-    
+    #inicjalizacja permutacji zadań
+    # pi = nr.copy()
+
+    #strutktura skladajaca sie z
+    solution = []
+    for task in tasks:
+        solution.append([pi[task-1], r[task-1], p[task-1], q[task-1]])
+
+    #Schrage
+    print("Po sortowaniu:")
+    pi = schragePmtn(r, p, q, tasks)
+    sort = {x: i for i, x in enumerate(pi)}
+    solution.sort(key = lambda x: sort[x[0]])
+
+    rjSchrage = []
+    pjSchrage = []
+    qjSchrage = []
+
+    for task in tasks:
+        rjSchrage.append(solution[task-1][1])
+        pjSchrage.append(solution[task-1][2])
+        qjSchrage.append(solution[task-1][3])
+
+    SSchrage, CSchrage, CqSchrage, CmaxSchrager = calculate(rjSchrage, pjSchrage, qjSchrage, taskNumber)
+    #print("pi:", pi)
+    #print("S: ", SSchrage)
+    #print("C: ", CSchrage)
+    #print(f"Cq: {CqSchrage}")
+    print("Cmax", CmaxSchrager)
+
+
 if __name__ == '__main__':
 	main()
+
+
