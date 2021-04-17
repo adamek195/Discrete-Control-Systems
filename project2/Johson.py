@@ -1,24 +1,23 @@
-def findmin(pj):
-    values, idx2 = [], []
-    for idx1 in range(len(pj)):
-        values.append(min(pj[idx1]))
-        idx2.append(pj[idx1].index(values[-1]))
-    idx1 = values.index(min(values))
-    return idx1, idx2[idx1]
+import math
 
-def johson(tasks, pj):
+def Johnson(tasks, p_ij):
     l = 0
     k = len(tasks) - 1
     tasks = list(tasks)
     N = tasks.copy()
     while (len(N)):
-        j, i = findmin(pj)
-        if pj[j][0] < pj[j][1]:
+        task_processes = []
+        machine_index = []
+        for j in range(len(p_ij)):
+            task_processes.append(min(p_ij[j]))
+            machine_index.append(p_ij[j].index(task_processes[-1]))
+        j = task_processes.index(min(task_processes))
+        if p_ij[j][0] < p_ij[j][1]:
             tasks[l] = j + 1
             l += 1
         else:
             tasks[k] = j + 1
             k -= 1
         N.remove(j + 1)
-        pj[j] = [9999999999,9999999999] # pj.remove(pj[j]) psuje findmin
+        p_ij[j] = [math.inf , math.inf]
     return tasks

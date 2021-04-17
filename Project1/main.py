@@ -73,10 +73,10 @@ def main():
         qjSchrage.append(solution[task-1][3])
 
     SSchrage, CSchrage, CqSchrage, CmaxSchrager = calculate(rjSchrage, pjSchrage, qjSchrage, taskNumber)
-    #print("pi:", pi)
-    #print("S: ", SSchrage)
-    #print("C: ", CSchrage)
-    #print(f"Cq: {CqSchrage}")
+    print("pi:", pi)
+    print("S: ", SSchrage)
+    print("C: ", CSchrage)
+    print(f"Cq: {CqSchrage}")
     print("Cmax", CmaxSchrager)
 
 

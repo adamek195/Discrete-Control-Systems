@@ -32,4 +32,4 @@ def calculate(pj, taskNumber, machineNumber):
         Cj.append(C.copy())
         C.clear()
         Cmax = max(Cmax, Cj[j][machineNumber-1])
-    return Sj, Cj, Cmax
+    return Cj, Cmax
