@@ -2,12 +2,15 @@ from typing import List
 
 #liczenie wartości funkcji celu
 def calculate(pj, taskNumber, machineNumber):
+    """
+    S - momenty rozpoczęcia operacji
+    C - momenty zakończenia operacji
+    Cmax - czas zakończenia wykonywania wszystkich zadań
+    """
     Sj = []
     Cj = []
     S = []
     C = []
-
-
     S.append(0)
     C.append(S[0]+pj[0][0])
     S.append(max(C[0], 0))
@@ -20,7 +23,6 @@ def calculate(pj, taskNumber, machineNumber):
     Cj.append(C.copy())
     C.clear()
     Cmax = Cj[0][1]
-
     for j in range(1, taskNumber):
         S.append(max(0,Cj[j-1][0]))
         C.append(S[0]+pj[j][0])
