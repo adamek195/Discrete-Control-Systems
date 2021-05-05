@@ -1,6 +1,8 @@
 from RandomNumberGenerator import RandomNumberGenerator
 import itertools
 import sys
+import numpy as np
+
 def main():
     seed = int(input("Wprowadź Z: "))
     generator = RandomNumberGenerator(seed)
@@ -33,8 +35,7 @@ def main():
     print("\n")
 
     print(f'F={target_fun(pj,wj,dj,taskNumber)}')
-    brute_force()
-    # print(f'brute force F={brute_force(pj,wj,dj,taskNumber)}')
+    print(f'F={brute_force(pj,wj,dj,taskNumber)}')
 
 
 def target_fun(pj,wj,dj,taskNumber):
@@ -58,14 +59,21 @@ def target_fun(pj,wj,dj,taskNumber):
     return F
 
 def brute_force(pj,wj,dj,taskNumber):
-    comb = list(itertools.permutations(range(1,taskNumber)))
-    print(comb)
-    # F_wynik = sys.maxsize
-    # for i in comb:
-    #     print(comb[0])
-    #     if target_fun(comb[i]) < F_wynik:
-    #         F_wynik = target_fun(i)
-    # return F_wynik
+    comb=list(itertools.permutations(range(1,taskNumber+1)))
+    F_wynik = sys.maxsize
+
+    for i in range(len(comb)):
+        pj_i = []
+        wj_i = []
+        dj_i = []
+        for j in range(len(comb[i])):
+            pj_i.append(pj[comb[i][j]-1])
+            wj_i.append(wj[comb[i][j]-1])
+            dj_i.append(dj[comb[i][j]-1])
+        target = target_fun(pj_i,wj_i,dj_i,len(comb[i]))
+        if target < F_wynik:
+            F_wynik = target
+    return F_wynik
 
 if __name__ == '__main__':
 	main()
