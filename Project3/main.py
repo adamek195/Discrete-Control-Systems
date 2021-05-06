@@ -1,7 +1,6 @@
 from RandomNumberGenerator import RandomNumberGenerator
 import itertools
 import sys
-import numpy as np
 
 def main():
     seed = int(input("Wprowadź Z: "))
@@ -34,9 +33,9 @@ def main():
     print("dj", dj)
     print("\n")
 
-    print(f'F={target_fun(pj,wj,dj,taskNumber)}')
-    print(f'F={brute_force(pj,wj,dj,taskNumber)}')
-
+    print(f'WiTi dla początkowego = {target_fun(pj,wj,dj,taskNumber)}')
+    print(f'WiTi dla Brute Force = {brute_force(pj,wj,dj,taskNumber)}')
+    print(f'WiTi dla Greedy algorithm = {greedy(pj,wj,dj,taskNumber)}')
 
 def target_fun(pj,wj,dj,taskNumber):
     S = []
@@ -60,7 +59,7 @@ def target_fun(pj,wj,dj,taskNumber):
 
 def brute_force(pj,wj,dj,taskNumber):
     comb=list(itertools.permutations(range(1,taskNumber+1)))
-    F_wynik = sys.maxsize
+    F_solution = sys.maxsize
 
     for i in range(len(comb)):
         pj_i = []
@@ -71,9 +70,27 @@ def brute_force(pj,wj,dj,taskNumber):
             wj_i.append(wj[comb[i][j]-1])
             dj_i.append(dj[comb[i][j]-1])
         target = target_fun(pj_i,wj_i,dj_i,len(comb[i]))
-        if target < F_wynik:
-            F_wynik = target
-    return F_wynik
+        if target < F_solution:
+            F_solution = target
+    return F_solution
+
+def greedy(pj,wj,dj,taskNumber):
+    calc = []
+    for index, elem in enumerate(range(taskNumber)):
+        calc.append([dj[index], pj[index], wj[index]])
+
+    calc = sorted(calc, key=lambda x: x[0])
+    pj, wj, dj = [], [], []
+    for value in calc:
+        dj.append(value[0])
+        pj.append(value[1])
+        wj.append(value[2])
+
+    F_solution = target_fun(pj, wj, dj, taskNumber)
+
+    return F_solution
+
+
 
 if __name__ == '__main__':
 	main()
