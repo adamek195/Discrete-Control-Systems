@@ -16,4 +16,4 @@ def target_fun(pj,wj,dj,taskNumber):
     F=0
     for task in range(0,taskNumber):
         F += wj[task]*T[task]
-    return F
+    return F, T, C

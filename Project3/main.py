@@ -29,16 +29,26 @@ def main():
     for task in tasks:
         dj.append(generator.nextInt(1,X))
 
-    print("Poczatkowe ustawienie\n")
     print("\nnr:", nr)
     print("pj: ", pj)
     print("wj ", wj)
     print("dj", dj)
-    print("\n")
 
-    print(f'WiTi dla początkowego = {target_fun(pj,wj,dj,taskNumber)}')
-    print(f'WiTi dla Brute Force = {brute_force(pj,wj,dj,taskNumber)}')
-    print(f'WiTi dla Greedy algorithm = {greedy(pj,wj,dj,taskNumber)}')
+    witi_start = target_fun(pj,wj,dj,taskNumber)
+    print(f'\nWiTi dla początkowego = {witi_start[0]}')
+    print(f'C: {witi_start[2]}')
+    print(f'T: {witi_start[1]}')
+
+
+    witi_greedy = greedy(pj,wj,dj,taskNumber)
+    print(f'\nWiTi dla Greedy algorithm = {witi_greedy[0]}')
+    print(f'C: {witi_greedy[2]}')
+    print(f'T: {witi_greedy[1]}')
+
+    witi_brute_force = brute_force(pj,wj,dj,taskNumber)
+    print(f'\nWiTi dla Brute Force = {witi_brute_force[0]}')
+    print(f'C: {witi_brute_force[2]}')
+    print(f'T: {witi_brute_force[1]}')
 
 if __name__ == '__main__':
 	main()

@@ -12,6 +12,6 @@ def greedy(pj,wj,dj,taskNumber):
         pj.append(value[1])
         wj.append(value[2])
 
-    F_solution = target_fun(pj, wj, dj, taskNumber)
+    solution = target_fun(pj, wj, dj, taskNumber)
 
-    return F_solution
+    return solution
